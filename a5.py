@@ -59,7 +59,6 @@ class Board:
         row_str = ""
         row_num = 0
         for r in self.rows:
-            row_str += f"{r}\n"
             row_str += f"row {row_num}: {r}\n"
             row_num += 1
 
@@ -117,14 +116,11 @@ class Board:
         #    print(i)
         #    print(self.rows[i])
         for i,r in enumerate(self.rows):
-            print()
             for j, col in enumerate(r):
-                print(i, j, col)
                 if isinstance(col, list) and len(col) < mini:
                     mini = len(col)
                     row = i
                     column = j
-                    print(row, column, mini)
         return (row, column)
 
     def failure_test(self) -> bool:
@@ -188,13 +184,11 @@ def DFS(state: Board) -> Board:
     """
     s = Stack([state])
     while not s.is_empty():
-        print(s)
         b: Board = s.pop
         if b.goal_test():
             return b
         mcc = b.find_most_constrained_cell()
         row, col = mcc
-        print(row,col)
         for val in b.rows[row][col]:
             print(val)
             cpy = copy.deepcopy(b)
@@ -239,13 +233,13 @@ if __name__ == "__main__":
     # # CODE BELOW HERE RUNS YOUR BFS/DFS
     print("<<<<<<<<<<<<<< Solving Sudoku >>>>>>>>>>>>>>")
 
-    #  def test_dfs_or_bfs(use_dfs: bool, moves: List[Tuple[int, int, int]]) -> None:
-    #     b = Board()
-    #     # make initial moves to set up board
-    #     for move in moves:
-    #         b.update(*move)
+    def test_dfs_or_bfs(use_dfs: bool, moves: List[Tuple[int, int, int]]) -> None:
+         b = Board()
+         # make initial moves to set up board
+         for move in moves:
+             b.update(*move)
 
-    #     # print initial board
+         # print initial board
     #     print("<<<<< Initial Board >>>>>")
     #     b.print_pretty()
     #     # solve board
